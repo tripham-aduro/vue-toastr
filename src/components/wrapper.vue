@@ -227,6 +227,9 @@
         },
         methods: {
             addToast (data) {
+                if (this.list.indexOf(data) >= 0 ) {
+                    return
+                }
                 this.list.push(data)
                 // if have onCreated
                 if (typeof data.onCreated !== 'undefined') {
