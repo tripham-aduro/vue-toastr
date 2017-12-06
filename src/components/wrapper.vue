@@ -227,8 +227,10 @@
         },
         methods: {
             addToast (data) {
-                if (this.list.indexOf(data) >= 0 ) {
-                    return
+                for (const message of this.list) {
+                    if (message.type === data.type && message.msg === data.msg && message.position === data.position && message.title === data.title) {
+                        return
+                    }
                 }
                 this.list.push(data)
                 // if have onCreated
@@ -282,7 +284,7 @@
                 }
             },
             error (msg, title) {
-                let data = this.processObjectData(msg)
+                const data = this.processObjectData(msg)
                 data['type'] = 'error'
                 if (title !== undefined) {
                     data['title'] = title
@@ -290,7 +292,7 @@
                 return this.AddData(data)
             },
             success (msg, title) {
-                let data = this.processObjectData(msg)
+                const data = this.processObjectData(msg)
                 data['type'] = 'success'
                 if (title !== undefined) {
                     data['title'] = title
@@ -298,7 +300,7 @@
                 return this.AddData(data)
             },
             warning (msg, title) {
-                let data = this.processObjectData(msg)
+                const data = this.processObjectData(msg)
                 data['type'] = 'warning'
                 if (title !== undefined) {
                     data['title'] = title
@@ -306,7 +308,7 @@
                 return this.AddData(data)
             },
             info (msg, title) {
-                let data = this.processObjectData(msg)
+                const data = this.processObjectData(msg)
                 data['type'] = 'info'
                 if (title !== undefined) {
                     data['title'] = title
